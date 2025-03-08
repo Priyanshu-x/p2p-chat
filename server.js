@@ -1,34 +1,47 @@
 const express = require("express");
 const http = require("http");
-const { Server } = require("socket.io");
+const socketIo = require("socket.io");
+const path = require("path");
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = socketIo(server);
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+let waitingUser = null;
 
 io.on("connection", (socket) => {
     console.log("User connected:", socket.id);
 
-    socket.on("offer", (offer) => {
-        socket.broadcast.emit("offer", offer);
-    });
+    if (!waitingUser) {
+        // First user waits for a peer
+        waitingUser = socket;
+        socket.emit("waiting", { message: "Waiting for a peer..." });
+    } else {
+        // Second user connects, pair them up
+        socket.emit("paired", { partnerId: waitingUser.id, initiator: false });
+        waitingUser.emit("paired", { partnerId: socket.id, initiator: true });
 
-    socket.on("answer", (answer) => {
-        socket.broadcast.emit("answer", answer);
-    });
+        const user1 = waitingUser;
+        const user2 = socket;
+        waitingUser = null;
 
-    socket.on("ice-candidate", (candidate) => {
-        socket.broadcast.emit("ice-candidate", candidate);
-    });
+        // Relay WebRTC signals
+        user1.on("offer", (offer) => user2.emit("offer", offer));
+        user2.on("answer", (answer) => user1.emit("answer", answer));
+        user1.on("ice-candidate", (candidate) => user2.emit("ice-candidate", candidate));
+        user2.on("ice-candidate", (candidate) => user1.emit("ice-candidate", candidate));
+    }
 
-    socket.on("video-call-started", () => {
-        socket.broadcast.emit("video-call-started");
-    });
-
+    // Handle disconnects
     socket.on("disconnect", () => {
         console.log("User disconnected:", socket.id);
+        if (waitingUser === socket) waitingUser = null;
     });
 });
 
