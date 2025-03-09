@@ -1,16 +1,96 @@
 body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #121212;
+    color: white;
     font-family: Arial, sans-serif;
-    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#startChat {
+    background-color: #007BFF;
+    color: white;
+}
+
+#sendMessage {
+    background-color: #28a745;
+    color: white;
+}
+
+#startVideo {
+    background-color: #dc3545;
+    color: white;
+}
+
+#openChat {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 18px;
+}
+
+#chat-container {
+    display: none;
+    width: 300px;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#chat-box {
+    height: 200px;
+    overflow-y: auto;
+    background-color: #444;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.chat-input-container {
+    display: flex;
+    margin-top: 10px;
+}
+
+#chat-input {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    background-color: #555;
+    color: white;
+}
+
+#sendMessage {
+    border-radius: 0 5px 5px 0;
 }
 
 .videos {
     display: flex;
-    justify-content: center;
+    gap: 10px;
     margin-top: 20px;
 }
 
 video {
-    width: 45%;
-    border: 2px solid black;
-    margin: 10px;
+    width: 200px;
+    border: 2px solid #555;
+    border-radius: 5px;
 }

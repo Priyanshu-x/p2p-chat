@@ -5,7 +5,12 @@ const path = require("path");
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
+});
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -16,35 +21,41 @@ app.get("/", (req, res) => {
 let waitingUser = null;
 
 io.on("connection", (socket) => {
-    console.log("User connected:", socket.id);
+    console.log("🟢 User connected:", socket.id);
 
     if (!waitingUser) {
-        // First user waits for a peer
         waitingUser = socket;
         socket.emit("waiting", { message: "Waiting for a peer..." });
     } else {
-        // Second user connects, pair them up
-        socket.emit("paired", { partnerId: waitingUser.id, initiator: false });
-        waitingUser.emit("paired", { partnerId: socket.id, initiator: true });
-
         const user1 = waitingUser;
         const user2 = socket;
         waitingUser = null;
 
-        // Relay WebRTC signals
-        user1.on("offer", (offer) => user2.emit("offer", offer));
-        user2.on("answer", (answer) => user1.emit("answer", answer));
-        user1.on("ice-candidate", (candidate) => user2.emit("ice-candidate", candidate));
-        user2.on("ice-candidate", (candidate) => user1.emit("ice-candidate", candidate));
+        console.log(`🔗 Pairing ${user1.id} with ${user2.id}`);
+
+        user1.emit("paired", { partnerId: user2.id, initiator: true });
+        user2.emit("paired", { partnerId: user1.id, initiator: false });
     }
 
-    // Handle disconnects
+    socket.on("offer", (offer) => {
+        socket.broadcast.emit("offer", offer);
+    });
+
+    socket.on("answer", (answer) => {
+        socket.broadcast.emit("answer", answer);
+    });
+
+    socket.on("ice-candidate", (candidate) => {
+        socket.broadcast.emit("ice-candidate", candidate);
+    });
+
     socket.on("disconnect", () => {
-        console.log("User disconnected:", socket.id);
+        console.log("🔴 User disconnected:", socket.id);
         if (waitingUser === socket) waitingUser = null;
     });
 });
 
-server.listen(3000, () => {
-    console.log("Server running on http://localhost:3000");
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
 });

@@ -4,29 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>P2P Secure Chat</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> <!-- ✅ External CSS -->
 </head>
 <body>
     <h1>P2P Secure Chat</h1>
 
     <button id="startChat">Start Chat</button>
 
-    <!-- Chat Box -->
-    <div id="chat-container" style="display: none;">
+    <div id="chat-container" class="hidden">
         <div id="chat-box"></div>
-        <input type="text" id="chat-input" placeholder="Type a message...">
-        <button id="sendMessage">Send</button>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Type a message...">
+            <button id="sendMessage">Send</button>
+        </div>
     </div>
 
-    <button id="startVideo" style="display: none;">Start Video</button>
+    <button id="startVideo" class="hidden">Start Video</button>
+    <button id="openChat">💬</button>
 
-    <!-- Video Call -->
-    <div class="videos" style="display: none;">
+    <div class="videos hidden">
         <video id="localVideo" autoplay muted></video>
         <video id="remoteVideo" autoplay></video>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="client.js"></script>
+
 </body>
 </html>
