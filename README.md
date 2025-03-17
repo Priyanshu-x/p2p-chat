@@ -1,9 +1,7 @@
-# p2p-chat
+Here is the live website for P2P Secure Chat: https://p2p-chat-12sl.onrender.com/
 
-Here is the live website of the p2p-secure-chat : 
-https://p2p-chat-12sl.onrender.com/
+Open this website on two devices, then click the Start Chat button on both devices. Now, enjoy the enormous joy of private chatting, where no data is stored!
 
+At a time, only two people can chat. If more users visit the website, they will be paired separately without disturbing existing connections.
 
-One this website in two devices, and then click start chat button in the both device. Now enjoy your enomurs joy of private chatting, where no data is stored. 
-At a time only two people can chat, if more client come to the website, then they will be paired separately without disturbing the existing old connection. 
-And their is a fun part also, whenever a message is sent , a random sound will play at the both device.
+And here's the fun part, whenever a message is sent, a random sound plays on both devices!
