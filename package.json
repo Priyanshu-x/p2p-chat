@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "build:css": "npx @tailwindcss/cli -i ./src/input.css -o ./public/style.css --watch"
+    "build:css": "npx @tailwindcss/cli -i ./src/input.css -o ./public/style.css",
+    "build": "npm install && npm run build:css",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
