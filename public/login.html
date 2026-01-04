@@ -4,13 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - P2P Chat</title>
+    <title>Private Relay - Secure Login</title>
+    <meta name="description" content="Secure, minimalist P2P chat relay. No logs, just privacy.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="flex items-center justify-center p-4">
     <div class="minimal-card flex flex-col items-center">
-        <h1 class="text-2xl font-light mb-8 tracking-widest uppercase">Login</h1>
+        <img src="favicon.svg" alt="Logo" class="w-16 h-16 mb-4 opacity-90">
+        <h1 class="text-2xl font-light mb-2 tracking-[0.3em] uppercase">Private Relay</h1>
+        <p class="text-xs text-gray-500 mb-8 uppercase tracking-widest text-center">Zero Logs. Pure Connection.</p>
         <form id="loginForm" class="w-full flex flex-col gap-6">
             <input type="text" id="username" placeholder="USERNAME" required class="input-field">
             <input type="password" id="password" placeholder="PASSWORD" required class="input-field">
