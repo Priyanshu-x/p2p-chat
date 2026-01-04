@@ -16,12 +16,15 @@ const socketHandler = require('./socket/socketHandler');
 const app = express();
 const server = http.createServer(app);
 
+// Trust Proxy (Required for Render/Heroku SSL termination)
+app.set('trust proxy', 1);
+
 // Security Middleware
 app.use(helmet({
     contentSecurityPolicy: {
         directives: {
             defaultSrc: ["'self'"],
-            scriptSrc: ["'self'", "'unsafe-inline'"], // Needed for client.js and socket.io
+            scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"], // unsafe-eval added as per requirement
             connectSrc: ["'self'", "ws:", "wss:"], // Needed for WebSocket
             imgSrc: ["'self'", "data:"],
             mediaSrc: ["'self'"]
