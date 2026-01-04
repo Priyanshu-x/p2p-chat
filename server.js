@@ -1,61 +1,100 @@
+require('dotenv').config();
 const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
 const path = require("path");
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const cors = require('cors');
+const session = require('express-session');
+const SQLiteStore = require('connect-sqlite3')(session);
+
+const logger = require('./config/logger');
+const authRoutes = require('./routes/authRoutes');
+const socketHandler = require('./socket/socketHandler');
 
 const app = express();
 const server = http.createServer(app);
+
+// Security Middleware
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "'unsafe-inline'"], // Needed for client.js and socket.io
+            connectSrc: ["'self'", "ws:", "wss:"], // Needed for WebSocket
+            imgSrc: ["'self'", "data:"],
+            mediaSrc: ["'self'"]
+        }
+    }
+}));
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Rate Limiting
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // limit each IP to 100 requests per windowMs
+});
+app.use(limiter);
+
+// Session Setup
+const sessionMiddleware = session({
+    store: new SQLiteStore({ db: 'sessions.db', dir: './database' }),
+    secret: process.env.SESSION_SECRET || 'default_secret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 // 1 day
+    }
+});
+
+app.use(sessionMiddleware);
+
+// Logging request
+app.use((req, res, next) => {
+    logger.info(`${req.method} ${req.url}`);
+    next();
+});
+
+// Routes
+app.use('/api/auth', authRoutes);
+
+// Static files (protected or public?)
+// We'll serve login/register freely, but protect dashboard if we had one.
+// The root '/' serves index.html, which now needs auth check.
+app.use(express.static(path.join(__dirname, "public")));
+
+// Route to check auth status for frontend redirection
+app.get('/api/auth/status', (req, res) => {
+    if (req.session.userId) res.json({ authenticated: true });
+    else res.json({ authenticated: false });
+});
+
+// Socket.io Setup
 const io = socketIo(server, {
     cors: {
-        origin: "*",
+        origin: "*", // Adjust for production
         methods: ["GET", "POST"]
     }
 });
 
-app.use(express.static(path.join(__dirname, "public")));
+// Share session with socket.io
+const wrap = middleware => (socket, next) => middleware(socket.request, {}, next);
+io.use(wrap(sessionMiddleware));
 
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "index.html"));
-});
+// Initialize Socket Logic
+socketHandler(io);
 
-let waitingUser = null;
-
-io.on("connection", (socket) => {
-    console.log("🟢 User connected:", socket.id);
-
-    if (!waitingUser) {
-        waitingUser = socket;
-        socket.emit("waiting", { message: "Waiting for a peer..." });
-    } else {
-        const user1 = waitingUser;
-        const user2 = socket;
-        waitingUser = null;
-
-        console.log(`🔗 Pairing ${user1.id} with ${user2.id}`);
-
-        user1.emit("paired", { partnerId: user2.id, initiator: true });
-        user2.emit("paired", { partnerId: user1.id, initiator: false });
-    }
-
-    socket.on("offer", (offer) => {
-        socket.broadcast.emit("offer", offer);
+// Only start server if this file is run directly
+if (require.main === module) {
+    const PORT = process.env.PORT || 3000;
+    server.listen(PORT, () => {
+        logger.info(`Server running on http://localhost:${PORT}`);
     });
+}
 
-    socket.on("answer", (answer) => {
-        socket.broadcast.emit("answer", answer);
-    });
-
-    socket.on("ice-candidate", (candidate) => {
-        socket.broadcast.emit("ice-candidate", candidate);
-    });
-
-    socket.on("disconnect", () => {
-        console.log("🔴 User disconnected:", socket.id);
-        if (waitingUser === socket) waitingUser = null;
-    });
-});
-
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+module.exports = { app, server };

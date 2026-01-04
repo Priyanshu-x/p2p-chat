@@ -1,34 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>P2P Secure Chat</title>
-    <link rel="stylesheet" href="style.css"> <!-- ✅ External CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>P2P Secure Chat</h1>
 
-    <button id="startChat">Start Chat</button>
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
 
-    <div id="chat-container" class="hidden">
-        <div id="chat-box"></div>
-        <div class="chat-input-container">
-            <input type="text" id="chat-input" placeholder="Type a message...">
-            <button id="sendMessage">Send</button>
+    <div class="w-full max-w-4xl flex flex-col relative min-h-[600px] border border-[#222]">
+
+        <!-- Header -->
+        <!-- Header -->
+        <div class="border-b border-[#222] p-6 flex justify-between items-center bg-black">
+            <div class="flex items-center gap-3">
+                <h1 class="text-xl font-light tracking-[0.2em] uppercase">Private Relay</h1>
+                <div id="connectionStatus"
+                    class="flex items-center gap-2 px-3 py-1 border border-[#333] rounded-full hidden">
+                    <div id="statusDot" class="w-2 h-2 rounded-full bg-red-500 transition-colors duration-300"></div>
+                    <span id="statusText" class="text-[10px] uppercase tracking-widest text-gray-400">Offline</span>
+                </div>
+            </div>
+            <button id="logoutBtn"
+                class="text-xs text-red-500 hover:text-red-400 uppercase tracking-widest">Logout</button>
         </div>
-    </div>
 
-    <button id="startVideo" class="hidden">Start Video</button>
-    <button id="openChat">💬</button>
+        <!-- Main Content -->
+        <div class="flex-1 p-6 relative flex flex-col items-center justify-center bg-black">
 
-    <div class="videos hidden">
-        <video id="localVideo" autoplay muted></video>
-        <video id="remoteVideo" autoplay></video>
+            <div id="startChatContainer" class="flex flex-col items-center gap-4">
+                <p class="text-gray-500 text-sm uppercase tracking-widest">Secure Connection Ready</p>
+                <div class="animate-pulse w-2 h-2 bg-green-500 rounded-full mb-4"></div>
+                <button id="startChat" class="btn-primary text-sm tracking-widest uppercase px-8 py-4">Initialize
+                    Pairing</button>
+            </div>
+
+            <div id="chat-container" class="hidden w-full h-full flex flex-col absolute inset-0 bg-black">
+                <div id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-4 scrollbar-thin scrollbar-thumb-gray-800">
+                    <!-- Messages will look like terminal output or minimalist blocks -->
+                </div>
+
+                <div class="p-4 border-t border-[#222] bg-black">
+                    <!-- Reply Preview -->
+                    <div id="reply-preview"
+                        class="hidden mb-2 p-2 border-l-2 border-blue-500 bg-[#111] flex justify-between items-center text-xs">
+                        <div>
+                            <span class="text-blue-400 font-bold block mb-1">Replying to...</span>
+                            <span id="reply-content" class="text-gray-400 italic truncate max-w-[200px] block"></span>
+                        </div>
+                        <button id="cancelReply" class="text-red-500 hover:text-red-400 font-bold px-2">X</button>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <input type="text" id="chat-input" placeholder="Type message..."
+                            class="flex-1 bg-transparent border-none text-white focus:outline-none font-mono text-sm">
+                        <button id="sendMessage"
+                            class="text-blue-500 hover:text-white uppercase text-xs font-bold tracking-wider">Send</button>
+                    </div>
+                </div>
+                <!-- Typing Ind -->
+                <div id="typing-indicator"
+                    class="absolute bottom-[70px] left-6 text-[10px] text-gray-500 uppercase tracking-widest"></div>
+            </div>
+
+            <button id="startVideo"
+                class="hidden absolute top-6 right-20 text-xs uppercase tracking-widest text-purple-500 hover:text-purple-400">
+                Video
+            </button>
+
+            <div class="videos hidden absolute top-16 right-6 flex flex-col gap-4 z-10">
+                <video id="localVideo" autoplay muted class="w-48 border border-[#333] bg-black"></video>
+                <video id="remoteVideo" autoplay class="w-48 border border-blue-900/30 bg-black"></video>
+            </div>
+        </div>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="client.js"></script>
 
 </body>
+
 </html>

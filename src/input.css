@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+  --color-black-main: #000000;
+  --color-white-main: #FFFFFF;
+  --color-off-white: #FAFAFA;
+  --color-accent-blue: #007BFF;
+}
+
+/* Minimalist B&W Theme */
+body {
+    @apply bg-[var(--color-black-main)] text-[var(--color-off-white)] font-sans antialiased;
+}
+
+/* Removed Glassmorphism. Using solid cleaner lines. */
+.minimal-card {
+    @apply bg-transparent border border-[#333] rounded-none p-8 max-w-sm w-full;
+}
+
+.btn-primary {
+    @apply bg-[var(--color-accent-blue)] hover:bg-blue-600 text-white text-sm font-medium py-3 px-6 rounded-none transition-colors duration-200;
+}
+
+/* Success/Danger can stay but muted or just use the accent for CTAs primarily */
+.btn-success {
+    @apply bg-white text-black border border-white hover:bg-gray-200 font-medium py-2 px-6 rounded-none transition-colors;
+}
+
+.btn-danger {
+    @apply text-red-500 hover:text-red-400 text-sm font-medium py-2 px-4 transition-colors;
+}
+
+.input-field {
+    @apply w-full p-3 bg-black border-b border-[#333] text-[var(--color-off-white)] placeholder-gray-600 focus:outline-none focus:border-[var(--color-accent-blue)] transition-colors rounded-none;
+}

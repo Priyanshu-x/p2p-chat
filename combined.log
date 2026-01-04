@@ -1,0 +1,384 @@
+{"level":"info","message":"Server running on http://localhost:3000","timestamp":"2026-01-04T05:25:15.744Z"}
+{"level":"info","message":"Connected to SQLite database","timestamp":"2026-01-04T05:25:15.749Z"}
+{"level":"info","message":"POST /api/auth/register","timestamp":"2026-01-04T05:25:24.802Z"}
+{"level":"info","message":"New user registered: user_1767504324734","timestamp":"2026-01-04T05:25:24.864Z"}
+{"level":"info","message":"POST /api/auth/login","timestamp":"2026-01-04T05:25:24.888Z"}
+{"level":"info","message":"User logged in: user_1767504324734","timestamp":"2026-01-04T05:25:24.913Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:25:24.923Z"}
+{"level":"info","message":"Server running on http://localhost:3000","timestamp":"2026-01-04T05:37:21.777Z"}
+{"level":"info","message":"Connected to SQLite database","timestamp":"2026-01-04T05:37:21.784Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:37:41.595Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:37:41.833Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:37:41.870Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:37:42.275Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:37:42.408Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T05:37:42.452Z"}
+{"level":"warn","message":"Unauthenticated socket connection attempted: 6fOFzmMdjX8XUalUAAAB","timestamp":"2026-01-04T05:37:42.462Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:37:42.653Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:37:42.674Z"}
+{"level":"info","message":"POST /api/auth/login","timestamp":"2026-01-04T05:37:53.829Z"}
+{"level":"info","message":"GET /register.html","timestamp":"2026-01-04T05:37:56.182Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:37:56.274Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:37:56.276Z"}
+{"level":"info","message":"POST /api/auth/register","timestamp":"2026-01-04T05:38:05.348Z"}
+{"level":"info","message":"New user registered: test1","timestamp":"2026-01-04T05:38:05.410Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:38:05.462Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:38:05.571Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:38:05.572Z"}
+{"level":"info","message":"🟢 User connected: test1 (uoOFFyF5-Flv3duMAAAD)","timestamp":"2026-01-04T05:38:05.797Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:38:05.846Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:38:16.460Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:38:16.640Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:38:16.646Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:38:16.731Z"}
+{"level":"warn","message":"Unauthenticated socket connection attempted: HfP9sWnVBTduEmNgAAAF","timestamp":"2026-01-04T05:38:16.744Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T05:38:16.786Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:38:16.802Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:38:16.868Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:38:16.870Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:38:16.908Z"}
+{"level":"info","message":"GET /register.html","timestamp":"2026-01-04T05:38:18.440Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:38:18.509Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:38:18.514Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:38:18.543Z"}
+{"level":"info","message":"POST /api/auth/register","timestamp":"2026-01-04T05:38:26.736Z"}
+{"level":"info","message":"New user registered: test2","timestamp":"2026-01-04T05:38:26.784Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:38:26.820Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:38:26.919Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:38:26.920Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:38:26.966Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:38:26.968Z"}
+{"level":"info","message":"🟢 User connected: test2 (8IOIk2t7kL4yf4kSAAAH)","timestamp":"2026-01-04T05:38:26.976Z"}
+{"level":"info","message":"🔗 Pairing test1 with test2 in room_uoOFFyF5-Flv3duMAAAD_8IOIk2t7kL4yf4kSAAAH","timestamp":"2026-01-04T05:38:26.977Z"}
+{"level":"info","message":"GET /sounds/notification2.mp3","timestamp":"2026-01-04T05:38:41.140Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:38:41.228Z"}
+{"level":"info","message":"GET /sounds/notification5.mp3","timestamp":"2026-01-04T05:38:52.476Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:38:52.520Z"}
+{"level":"info","message":"GET /sounds/notification3.mp3","timestamp":"2026-01-04T05:38:59.087Z"}
+{"level":"info","message":"🔴 User disconnected: test2 (8IOIk2t7kL4yf4kSAAAH)","timestamp":"2026-01-04T05:39:34.616Z"}
+{"level":"info","message":"POST /api/auth/logout","timestamp":"2026-01-04T05:39:38.589Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T05:39:38.638Z"}
+{"level":"info","message":"🔴 User disconnected: test1 (uoOFFyF5-Flv3duMAAAD)","timestamp":"2026-01-04T05:39:38.660Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:39:38.761Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:39:38.766Z"}
+{"level":"info","message":"Connected to SQLite database","timestamp":"2026-01-04T05:42:59.526Z"}
+{"level":"info","message":"POST /api/auth/register","timestamp":"2026-01-04T05:42:59.599Z"}
+{"level":"info","message":"New user registered: testuser_1767505379499","timestamp":"2026-01-04T05:42:59.653Z"}
+{"level":"info","message":"POST /api/auth/login","timestamp":"2026-01-04T05:42:59.688Z"}
+{"level":"info","message":"User logged in: testuser_1767505379499","timestamp":"2026-01-04T05:42:59.721Z"}
+{"level":"info","message":"GET /api/auth/me","timestamp":"2026-01-04T05:42:59.745Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T05:44:26.012Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:44:26.107Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:44:26.110Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:44:26.630Z"}
+{"level":"info","message":"POST /api/auth/login","timestamp":"2026-01-04T05:44:37.149Z"}
+{"level":"info","message":"User logged in: test1","timestamp":"2026-01-04T05:44:37.195Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:44:37.258Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:44:37.361Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:44:37.366Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:44:37.485Z"}
+{"level":"info","message":"🟢 User connected: test1 (mBTcO3pf0za49thAAAAJ)","timestamp":"2026-01-04T05:44:37.573Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:44:46.078Z"}
+{"level":"info","message":"🔴 User disconnected: test1 (mBTcO3pf0za49thAAAAJ)","timestamp":"2026-01-04T05:44:46.104Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:44:46.156Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:44:46.158Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:44:46.258Z"}
+{"level":"info","message":"🟢 User connected: test1 (uLJqDTyPa8Tsru3HAAAL)","timestamp":"2026-01-04T05:44:46.291Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:44:46.318Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:44:54.797Z"}
+{"level":"info","message":"POST /api/auth/logout","timestamp":"2026-01-04T05:45:00.788Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T05:45:00.821Z"}
+{"level":"info","message":"🔴 User disconnected: test1 (uLJqDTyPa8Tsru3HAAAL)","timestamp":"2026-01-04T05:45:00.838Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:45:00.937Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:45:00.939Z"}
+{"level":"info","message":"POST /api/auth/login","timestamp":"2026-01-04T05:45:07.970Z"}
+{"level":"info","message":"User logged in: test1","timestamp":"2026-01-04T05:45:08.009Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:45:08.054Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:45:08.154Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:45:08.166Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:45:08.269Z"}
+{"level":"info","message":"🟢 User connected: test1 (njYQfPemdfjK7R-0AAAN)","timestamp":"2026-01-04T05:45:08.298Z"}
+{"level":"info","message":"🔴 User disconnected: test1 (njYQfPemdfjK7R-0AAAN)","timestamp":"2026-01-04T05:45:28.839Z"}
+{"level":"info","message":"Server running on http://localhost:3000","timestamp":"2026-01-04T05:51:16.319Z"}
+{"level":"info","message":"Connected to SQLite database","timestamp":"2026-01-04T05:51:16.329Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:51:37.002Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:51:37.124Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:51:37.128Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:51:37.526Z"}
+{"level":"info","message":"🟢 User connected: test1 (VtQOmrLQrPdFvFjRAAAB)","timestamp":"2026-01-04T05:51:37.590Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:51:48.492Z"}
+{"level":"info","message":"🔴 User disconnected: test1 (VtQOmrLQrPdFvFjRAAAB)","timestamp":"2026-01-04T05:51:48.563Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:51:48.574Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:51:48.581Z"}
+{"level":"info","message":"🟢 User connected: test1 (sch-8toIW5oyDzHHAAAD)","timestamp":"2026-01-04T05:51:48.740Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:51:48.743Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:51:48.746Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:51:48.749Z"}
+{"level":"info","message":"🔴 User disconnected: test1 (sch-8toIW5oyDzHHAAAD)","timestamp":"2026-01-04T05:51:48.798Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:51:48.839Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:51:48.841Z"}
+{"level":"info","message":"🟢 User connected: test1 (5cCJcJWB_zA9fZpRAAAF)","timestamp":"2026-01-04T05:51:49.001Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:51:49.022Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:51:49.035Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:51:50.567Z"}
+{"level":"info","message":"🔴 User disconnected: test1 (5cCJcJWB_zA9fZpRAAAF)","timestamp":"2026-01-04T05:51:50.630Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:51:50.660Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:51:50.673Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:51:50.771Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:51:50.878Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:51:50.885Z"}
+{"level":"info","message":"🟢 User connected: test1 (i5-5hVdVdUF1kJyBAAAH)","timestamp":"2026-01-04T05:51:51.039Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:51:51.086Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:51:51.098Z"}
+{"level":"info","message":"POST /api/auth/logout","timestamp":"2026-01-04T05:51:52.896Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T05:51:52.952Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:51:53.034Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:51:53.035Z"}
+{"level":"info","message":"🔴 User disconnected: test1 (i5-5hVdVdUF1kJyBAAAH)","timestamp":"2026-01-04T05:51:53.148Z"}
+{"level":"info","message":"POST /api/auth/login","timestamp":"2026-01-04T05:52:01.204Z"}
+{"level":"info","message":"User logged in: test1","timestamp":"2026-01-04T05:52:01.260Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:52:01.303Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:52:01.402Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:52:01.404Z"}
+{"level":"info","message":"🟢 User connected: test1 (XWCgqMQhZ9cXBfTSAAAJ)","timestamp":"2026-01-04T05:52:01.529Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:52:01.567Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:52:13.791Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:52:13.952Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:52:13.957Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:52:14.030Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:52:14.069Z"}
+{"level":"warn","message":"Unauthenticated socket connection attempted: WcJ38GwKcCd2FyEjAAAL","timestamp":"2026-01-04T05:52:14.074Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T05:52:14.113Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:52:14.187Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:52:14.191Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:52:14.212Z"}
+{"level":"info","message":"POST /api/auth/login","timestamp":"2026-01-04T05:52:22.333Z"}
+{"level":"info","message":"User logged in: test2","timestamp":"2026-01-04T05:52:22.365Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:52:22.409Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:52:22.509Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:52:22.522Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:52:22.575Z"}
+{"level":"info","message":"🟢 User connected: test2 (FU7i7jBdf_CIoZXYAAAN)","timestamp":"2026-01-04T05:52:22.582Z"}
+{"level":"info","message":"🔗 Pairing test1 with test2 in room_XWCgqMQhZ9cXBfTSAAAJ_FU7i7jBdf_CIoZXYAAAN","timestamp":"2026-01-04T05:52:22.582Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:52:22.593Z"}
+{"level":"info","message":"GET /sounds/notification6.mp3","timestamp":"2026-01-04T05:52:35.875Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:52:35.933Z"}
+{"level":"info","message":"GET /sounds/notification4.mp3","timestamp":"2026-01-04T05:52:43.358Z"}
+{"level":"info","message":"GET /sounds/notification2.mp3","timestamp":"2026-01-04T05:52:50.902Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:52:50.943Z"}
+{"level":"info","message":"GET /sounds/notification13.mp3","timestamp":"2026-01-04T05:52:57.702Z"}
+{"level":"info","message":"GET /sounds/notification8.mp3","timestamp":"2026-01-04T05:52:58.050Z"}
+{"level":"info","message":"GET /sounds/cid.mp3","timestamp":"2026-01-04T05:52:58.277Z"}
+{"level":"info","message":"GET /sounds/notification4.mp3","timestamp":"2026-01-04T05:52:58.473Z"}
+{"level":"info","message":"GET /sounds/notification12.mp3","timestamp":"2026-01-04T05:52:58.645Z"}
+{"level":"info","message":"GET /sounds/notification10.mp3","timestamp":"2026-01-04T05:52:58.829Z"}
+{"level":"info","message":"GET /sounds/notification13.mp3","timestamp":"2026-01-04T05:52:59.186Z"}
+{"level":"info","message":"GET /sounds/notification7.mp3","timestamp":"2026-01-04T05:52:59.370Z"}
+{"level":"info","message":"GET /sounds/notification7.mp3","timestamp":"2026-01-04T05:52:59.694Z"}
+{"level":"info","message":"GET /sounds/notification6.mp3","timestamp":"2026-01-04T05:52:59.879Z"}
+{"level":"info","message":"GET /sounds/notification11.mp3","timestamp":"2026-01-04T05:53:00.095Z"}
+{"level":"info","message":"GET /sounds/notification3.mp3","timestamp":"2026-01-04T05:53:00.785Z"}
+{"level":"info","message":"GET /sounds/notification9.mp3","timestamp":"2026-01-04T05:53:00.981Z"}
+{"level":"info","message":"GET /sounds/notification1.mp3","timestamp":"2026-01-04T05:53:01.167Z"}
+{"level":"info","message":"GET /sounds/notification5.mp3","timestamp":"2026-01-04T05:53:01.333Z"}
+{"level":"info","message":"GET /sounds/notification7.mp3","timestamp":"2026-01-04T05:53:01.930Z"}
+{"level":"info","message":"GET /sounds/cid.mp3","timestamp":"2026-01-04T05:53:02.714Z"}
+{"level":"info","message":"POST /api/auth/logout","timestamp":"2026-01-04T05:53:12.515Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T05:53:12.562Z"}
+{"level":"info","message":"🔴 User disconnected: test2 (FU7i7jBdf_CIoZXYAAAN)","timestamp":"2026-01-04T05:53:12.636Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:53:12.651Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:53:12.652Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:53:12.696Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:53:23.804Z"}
+{"level":"info","message":"🔴 User disconnected: test1 (XWCgqMQhZ9cXBfTSAAAJ)","timestamp":"2026-01-04T05:53:23.833Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:53:23.934Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:53:24.033Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:53:24.563Z"}
+{"level":"info","message":"🟢 User connected: test1 (w6SndC8Trr1N7LWxAAAP)","timestamp":"2026-01-04T05:53:24.605Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:53:24.618Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:57:40.921Z"}
+{"level":"info","message":"🔴 User disconnected: test1 (w6SndC8Trr1N7LWxAAAP)","timestamp":"2026-01-04T05:57:40.937Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:57:40.985Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:57:40.989Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:57:41.383Z"}
+{"level":"info","message":"🟢 User connected: test1 (BEWuykEagzuiUxlNAAAR)","timestamp":"2026-01-04T05:57:41.463Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:57:41.471Z"}
+{"level":"info","message":"POST /api/auth/logout","timestamp":"2026-01-04T05:57:46.712Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T05:57:46.764Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:57:46.858Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:57:46.859Z"}
+{"level":"info","message":"🔴 User disconnected: test1 (BEWuykEagzuiUxlNAAAR)","timestamp":"2026-01-04T05:57:46.991Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T05:57:49.096Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:57:49.152Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:57:49.154Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:57:49.303Z"}
+{"level":"info","message":"POST /api/auth/login","timestamp":"2026-01-04T05:57:55.517Z"}
+{"level":"info","message":"POST /api/auth/login","timestamp":"2026-01-04T05:57:56.423Z"}
+{"level":"info","message":"POST /api/auth/login","timestamp":"2026-01-04T05:58:00.812Z"}
+{"level":"info","message":"POST /api/auth/login","timestamp":"2026-01-04T05:58:02.724Z"}
+{"level":"info","message":"POST /api/auth/login","timestamp":"2026-01-04T05:58:03.214Z"}
+{"level":"info","message":"Server running on http://localhost:3000","timestamp":"2026-01-04T05:58:18.938Z"}
+{"level":"info","message":"Connected to SQLite database","timestamp":"2026-01-04T05:58:18.946Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T05:58:22.024Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:58:22.086Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:58:22.088Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:58:22.197Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T05:58:23.240Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:58:23.314Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:58:23.321Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:58:23.436Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T05:58:23.588Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:58:23.647Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:58:23.649Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:58:23.747Z"}
+{"level":"info","message":"POST /api/auth/login","timestamp":"2026-01-04T05:58:30.044Z"}
+{"level":"info","message":"User logged in: test1","timestamp":"2026-01-04T05:58:30.095Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:58:30.144Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:58:30.238Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:58:30.241Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:58:30.404Z"}
+{"level":"info","message":"🟢 User connected: test1 (ChpMlFQH-BLmSf_gAAAB)","timestamp":"2026-01-04T05:58:30.431Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:58:36.813Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:58:36.981Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:58:36.989Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:58:37.067Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:58:37.096Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T05:58:37.102Z"}
+{"level":"warn","message":"Unauthenticated socket connection attempted: dWjYfinzAuOyXfE5AAAD","timestamp":"2026-01-04T05:58:37.119Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:58:37.196Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:58:37.199Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:58:37.220Z"}
+{"level":"info","message":"POST /api/auth/login","timestamp":"2026-01-04T05:58:45.266Z"}
+{"level":"info","message":"User logged in: test2","timestamp":"2026-01-04T05:58:45.316Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:58:45.355Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:58:45.441Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:58:45.443Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:58:45.461Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:58:45.496Z"}
+{"level":"info","message":"🟢 User connected: test2 (peQ-YrtkNbrjmqbWAAAF)","timestamp":"2026-01-04T05:58:45.498Z"}
+{"level":"info","message":"🔗 Pairing test1 with test2 in room_ChpMlFQH-BLmSf_gAAAB_peQ-YrtkNbrjmqbWAAAF","timestamp":"2026-01-04T05:58:45.499Z"}
+{"level":"info","message":"GET /sounds/notification2.mp3","timestamp":"2026-01-04T05:58:54.636Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:58:54.678Z"}
+{"level":"info","message":"GET /sounds/notification6.mp3","timestamp":"2026-01-04T05:58:58.646Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:58:58.686Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:59:13.642Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:59:13.850Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:59:13.858Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:59:13.930Z"}
+{"level":"info","message":"🟢 User connected: test2 (baWorV6vsDoVVpfFAAAH)","timestamp":"2026-01-04T05:59:13.981Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:59:13.984Z"}
+{"level":"info","message":"POST /api/auth/logout","timestamp":"2026-01-04T05:59:17.332Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T05:59:17.382Z"}
+{"level":"info","message":"🔴 User disconnected: test2 (baWorV6vsDoVVpfFAAAH)","timestamp":"2026-01-04T05:59:17.470Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:59:17.478Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:59:17.479Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:59:17.505Z"}
+{"level":"info","message":"GET /register.html","timestamp":"2026-01-04T05:59:19.090Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:59:19.165Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:59:19.165Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:59:19.183Z"}
+{"level":"info","message":"POST /api/auth/register","timestamp":"2026-01-04T05:59:26.460Z"}
+{"level":"info","message":"New user registered: test3","timestamp":"2026-01-04T05:59:26.520Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T05:59:26.560Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:59:26.655Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T05:59:26.657Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T05:59:26.692Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:59:26.710Z"}
+{"level":"info","message":"🟢 User connected: test3 (stAcR5UPMjgcAus_AAAJ)","timestamp":"2026-01-04T05:59:26.712Z"}
+{"level":"info","message":"POST /api/auth/logout","timestamp":"2026-01-04T05:59:37.176Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T05:59:37.228Z"}
+{"level":"info","message":"🔴 User disconnected: test3 (stAcR5UPMjgcAus_AAAJ)","timestamp":"2026-01-04T05:59:37.295Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T05:59:37.311Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T05:59:37.316Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T05:59:37.335Z"}
+{"level":"info","message":"🔴 User disconnected: test2 (peQ-YrtkNbrjmqbWAAAF)","timestamp":"2026-01-04T05:59:42.887Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T06:02:26.757Z"}
+{"level":"info","message":"🔴 User disconnected: test1 (ChpMlFQH-BLmSf_gAAAB)","timestamp":"2026-01-04T06:02:26.796Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T06:02:26.851Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T06:02:26.853Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T06:02:27.004Z"}
+{"level":"info","message":"🟢 User connected: test1 (nTrCOpwOrjZxce9nAAAL)","timestamp":"2026-01-04T06:02:27.062Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T06:02:27.080Z"}
+{"level":"info","message":"POST /api/auth/logout","timestamp":"2026-01-04T06:02:29.931Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T06:02:29.979Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T06:02:30.064Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T06:02:30.065Z"}
+{"level":"info","message":"🔴 User disconnected: test1 (nTrCOpwOrjZxce9nAAAL)","timestamp":"2026-01-04T06:02:30.200Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T06:02:31.402Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T06:02:31.464Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T06:02:31.465Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T06:02:31.596Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T06:02:31.746Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T06:02:31.803Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T06:02:31.804Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T06:02:31.916Z"}
+{"level":"info","message":"POST /api/auth/login","timestamp":"2026-01-04T06:02:36.621Z"}
+{"level":"info","message":"User logged in: test1","timestamp":"2026-01-04T06:02:36.668Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T06:02:36.711Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T06:02:36.800Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T06:02:36.813Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T06:02:36.928Z"}
+{"level":"info","message":"🟢 User connected: test1 (CXPh5g_aqy_brP47AAAN)","timestamp":"2026-01-04T06:02:36.967Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T06:02:56.007Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T06:02:56.181Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T06:02:56.192Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T06:02:56.251Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T06:02:56.267Z"}
+{"level":"warn","message":"Unauthenticated socket connection attempted: H2EMXc_QDSonIMYQAAAP","timestamp":"2026-01-04T06:02:56.277Z"}
+{"level":"info","message":"GET /login.html","timestamp":"2026-01-04T06:02:56.305Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T06:02:56.381Z"}
+{"level":"info","message":"GET /auth.js","timestamp":"2026-01-04T06:02:56.386Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T06:02:56.406Z"}
+{"level":"info","message":"POST /api/auth/login","timestamp":"2026-01-04T06:03:04.839Z"}
+{"level":"info","message":"User logged in: test2","timestamp":"2026-01-04T06:03:04.873Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T06:03:04.918Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T06:03:05.001Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T06:03:05.003Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T06:03:05.039Z"}
+{"level":"info","message":"🟢 User connected: test2 (sXprQoijhZB6mOvnAAAR)","timestamp":"2026-01-04T06:03:05.062Z"}
+{"level":"info","message":"🔗 Pairing test1 with test2 in room_CXPh5g_aqy_brP47AAAN_sXprQoijhZB6mOvnAAAR","timestamp":"2026-01-04T06:03:05.066Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T06:03:05.072Z"}
+{"level":"info","message":"GET /sounds/cid.mp3","timestamp":"2026-01-04T06:03:11.031Z"}
+{"level":"info","message":"GET /sounds/notification11.mp3","timestamp":"2026-01-04T06:03:15.260Z"}
+{"level":"info","message":"🔴 User disconnected: test2 (sXprQoijhZB6mOvnAAAR)","timestamp":"2026-01-04T06:05:55.645Z"}
+{"level":"info","message":"🔴 User disconnected: test1 (CXPh5g_aqy_brP47AAAN)","timestamp":"2026-01-04T06:05:56.918Z"}
+{"level":"info","message":"Server running on http://localhost:3000","timestamp":"2026-01-04T06:06:21.771Z"}
+{"level":"info","message":"Connected to SQLite database","timestamp":"2026-01-04T06:06:21.779Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T06:06:25.023Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T06:06:25.077Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T06:06:25.079Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T06:06:25.142Z"}
+{"level":"info","message":"🟢 User connected: test2 (3tR_f0sx2KC9UJNDAAAB)","timestamp":"2026-01-04T06:06:25.201Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T06:06:25.204Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T06:06:26.542Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T06:06:26.618Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T06:06:26.645Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T06:06:26.861Z"}
+{"level":"info","message":"🟢 User connected: test1 (Or5A3a7k_82xuRJdAAAD)","timestamp":"2026-01-04T06:06:26.923Z"}
+{"level":"info","message":"🔗 Pairing test2 with test1 in room_3tR_f0sx2KC9UJNDAAAB_Or5A3a7k_82xuRJdAAAD","timestamp":"2026-01-04T06:06:26.954Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T06:06:26.967Z"}
+{"level":"info","message":"GET /sounds/notification7.mp3","timestamp":"2026-01-04T06:06:32.158Z"}
+{"level":"info","message":"GET /sounds/notification5.mp3","timestamp":"2026-01-04T06:06:41.897Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T06:06:41.926Z"}
+{"level":"info","message":"GET /sounds/notification9.mp3","timestamp":"2026-01-04T06:06:53.276Z"}
+{"level":"info","message":"GET /sounds/notification8.mp3","timestamp":"2026-01-04T06:06:58.557Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T06:06:58.597Z"}
+{"level":"info","message":"GET /sounds/notification3.mp3","timestamp":"2026-01-04T06:07:13.059Z"}
+{"level":"info","message":"GET /sounds/notification9.mp3","timestamp":"2026-01-04T06:07:27.227Z"}
+{"level":"info","message":"GET /sounds/notification5.mp3","timestamp":"2026-01-04T06:07:27.544Z"}
+{"level":"info","message":"GET /sounds/notification2.mp3","timestamp":"2026-01-04T06:07:27.707Z"}
+{"level":"info","message":"GET /sounds/notification7.mp3","timestamp":"2026-01-04T06:07:28.008Z"}
+{"level":"info","message":"GET /sounds/notification8.mp3","timestamp":"2026-01-04T06:07:28.263Z"}
+{"level":"info","message":"GET /sounds/notification7.mp3","timestamp":"2026-01-04T06:07:28.756Z"}
+{"level":"info","message":"GET /sounds/notification7.mp3","timestamp":"2026-01-04T06:07:29.661Z"}
+{"level":"info","message":"GET /sounds/notification11.mp3","timestamp":"2026-01-04T06:07:29.862Z"}
+{"level":"info","message":"GET /sounds/notification13.mp3","timestamp":"2026-01-04T06:07:30.017Z"}
+{"level":"info","message":"GET /sounds/notification6.mp3","timestamp":"2026-01-04T06:07:30.422Z"}
+{"level":"info","message":"🔴 User disconnected: test2 (3tR_f0sx2KC9UJNDAAAB)","timestamp":"2026-01-04T06:07:38.740Z"}
+{"level":"info","message":"GET /","timestamp":"2026-01-04T06:07:41.394Z"}
+{"level":"info","message":"🔴 User disconnected: test1 (Or5A3a7k_82xuRJdAAAD)","timestamp":"2026-01-04T06:07:41.421Z"}
+{"level":"info","message":"GET /style.css","timestamp":"2026-01-04T06:07:41.482Z"}
+{"level":"info","message":"GET /client.js","timestamp":"2026-01-04T06:07:41.488Z"}
+{"level":"info","message":"GET /api/auth/status","timestamp":"2026-01-04T06:07:41.667Z"}
+{"level":"info","message":"🟢 User connected: test1 (sGFAk7XbiA4qosi_AAAF)","timestamp":"2026-01-04T06:07:41.732Z"}
+{"level":"info","message":"GET /favicon.ico","timestamp":"2026-01-04T06:07:41.742Z"}
