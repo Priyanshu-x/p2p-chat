@@ -69,7 +69,7 @@ app.use('/api/auth', authRoutes);
 // Static files (protected or public?)
 // We'll serve login/register freely, but protect dashboard if we had one.
 // The root '/' serves index.html, which now needs auth check.
-app.use(express.static(path.join(__dirname, "public"), { extensions: ['html'] }));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Route to check auth status for frontend redirection
 app.get('/api/auth/status', (req, res) => {
