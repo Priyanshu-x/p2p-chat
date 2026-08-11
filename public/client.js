@@ -3,10 +3,10 @@ fetch('/api/auth/status')
     .then(res => res.json())
     .then(data => {
         if (!data.authenticated) {
-            window.location.href = '/login.html';
+            window.location.href = '/login';
         }
     })
-    .catch(() => window.location.href = '/login.html');
+    .catch(() => window.location.href = '/login');
 
 // socket is now auto-discovery (same domain)
 const socket = io({
@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (logoutBtn) {
         logoutBtn.addEventListener('click', async () => {
             await fetch('/api/auth/logout', { method: 'POST' });
-            window.location.href = '/login.html';
+            window.location.href = '/login';
         });
     }
 

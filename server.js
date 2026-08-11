@@ -66,10 +66,19 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api/auth', authRoutes);
 
+// Redirect .html requests to clean URLs
+app.use((req, res, next) => {
+    if (req.path.endsWith('.html')) {
+        const cleanPath = req.path.slice(0, -5);
+        return res.redirect(301, cleanPath === '' ? '/' : cleanPath);
+    }
+    next();
+});
+
 // Static files (protected or public?)
 // We'll serve login/register freely, but protect dashboard if we had one.
 // The root '/' serves index.html, which now needs auth check.
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public"), { extensions: ['html'] }));
 
 // Route to check auth status for frontend redirection
 app.get('/api/auth/status', (req, res) => {
