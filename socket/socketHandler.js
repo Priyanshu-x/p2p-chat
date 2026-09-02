@@ -1,87 +1,92 @@
 const logger = require('../config/logger');
 
-let waitingUser = null;
+// Map to store room state: roomCode -> { capacity: 2, users: Map<socketId, { socket, nickname }> }
+const rooms = new Map();
 
 module.exports = (io) => {
     io.on("connection", (socket) => {
-        const session = socket.request.session;
-        if (!session || !session.userId) {
-            logger.warn(`Unauthenticated socket connection attempted: ${socket.id}`);
+        const { roomCode, nickname } = socket.handshake.auth;
+
+        if (!roomCode || !nickname) {
+            logger.warn(`Unauthenticated socket connection attempted without roomCode/nickname: ${socket.id}`);
+            socket.emit("error_msg", "Room Code and Nickname are required.");
             socket.disconnect(true);
             return;
         }
 
-        const username = session.username;
-        logger.info(`🟢 User connected: ${username} (${socket.id})`);
+        logger.info(`🟢 User connected: ${nickname} (${socket.id}) to room ${roomCode}`);
 
-        // Pairing Logic
-        if (!waitingUser) {
-            waitingUser = socket;
-            socket.emit("waiting", { message: "Waiting for a peer..." });
-        } else {
-            const user1 = waitingUser;
-            const user2 = socket;
-
-            // Prevent pairing with self (if multiple tabs)
-            if (user1.id === user2.id) {
-                return;
-            }
-
-            waitingUser = null;
-
-            const roomId = `room_${user1.id}_${user2.id}`;
-            user1.join(roomId);
-            user2.join(roomId);
-
-            logger.info(`🔗 Pairing ${user1.request.session.username} with ${user2.request.session.username} in ${roomId}`);
-
-            // Notify both users
-            io.to(user1.id).emit("paired", { partnerId: user2.id, initiator: true, roomId });
-            io.to(user2.id).emit("paired", { partnerId: user1.id, initiator: false, roomId });
-
-            // Setup disconnect handlers for this pair to clean up if needed
-            // (Generic disconnect handles global cleanup)
+        if (!rooms.has(roomCode)) {
+            rooms.set(roomCode, { capacity: 2, users: new Map() });
         }
 
-        // Signaling - broadcast only to room
-        // Note: 'offer', 'answer', 'ice-candidate' usually go to specific peer.
-        // With creating a room for 2 people, we can just broadcast to room exclude sender.
+        const room = rooms.get(roomCode);
 
-        socket.on("offer", (offer) => {
-            // Get rooms this socket is in (excluding its own default room)
-            const rooms = Array.from(socket.rooms).filter(r => r !== socket.id);
-            rooms.forEach(room => {
-                socket.to(room).emit("offer", offer);
-            });
+        if (room.users.size >= room.capacity) {
+            socket.emit("error_msg", "Room Full");
+            socket.disconnect(true);
+            return;
+        }
+
+        // Add user to room
+        room.users.set(socket.id, { socket, nickname });
+        socket.join(roomCode);
+
+        // Notify existing users in the room about the new user
+        socket.to(roomCode).emit("user-joined", { partnerId: socket.id, partnerNickname: nickname });
+
+        // Let the new user know who is already in the room
+        const existingPeers = [];
+        for (const [id, user] of room.users.entries()) {
+            if (id !== socket.id) {
+                existingPeers.push({ partnerId: id, partnerNickname: user.nickname });
+            }
+        }
+        
+        socket.emit("joined-room", { 
+            roomCode,
+            capacity: room.capacity,
+            existingPeers 
         });
 
-        socket.on("answer", (answer) => {
-            const rooms = Array.from(socket.rooms).filter(r => r !== socket.id);
-            rooms.forEach(room => {
-                socket.to(room).emit("answer", answer);
-            });
+        // Capacity unlock event
+        socket.on("unlock_capacity", () => {
+            if (rooms.has(roomCode)) {
+                const r = rooms.get(roomCode);
+                r.capacity = 15;
+                io.to(roomCode).emit("capacity_unlocked", { capacity: 15 });
+                logger.info(`Unlocked capacity for room ${roomCode} to 15`);
+            }
         });
 
-        socket.on("ice-candidate", (candidate) => {
-            const rooms = Array.from(socket.rooms).filter(r => r !== socket.id);
-            rooms.forEach(room => {
-                socket.to(room).emit("ice-candidate", candidate);
-            });
+        // WebRTC Signaling Events
+        // Directed to specific target IDs to support mesh networking
+        
+        socket.on("offer", ({ targetId, offer }) => {
+            io.to(targetId).emit("offer", { senderId: socket.id, offer });
         });
 
-        // Chat messages via DataChannel are P2P, but if we wanted server relay:
-        // socket.on("message", (msg) => { ... })
+        socket.on("answer", ({ targetId, answer }) => {
+            io.to(targetId).emit("answer", { senderId: socket.id, answer });
+        });
+
+        socket.on("ice-candidate", ({ targetId, candidate }) => {
+            io.to(targetId).emit("ice-candidate", { senderId: socket.id, candidate });
+        });
 
         socket.on("disconnect", () => {
-            logger.info(`🔴 User disconnected: ${username} (${socket.id})`);
-            if (waitingUser === socket) {
-                waitingUser = null;
+            logger.info(`🔴 User disconnected: ${nickname} (${socket.id})`);
+            
+            if (rooms.has(roomCode)) {
+                const r = rooms.get(roomCode);
+                r.users.delete(socket.id);
+                
+                if (r.users.size === 0) {
+                    rooms.delete(roomCode); // Clean up empty room
+                } else {
+                    io.to(roomCode).emit("peer-disconnected", { partnerId: socket.id });
+                }
             }
-            // Ideally notify partner if in a room
-            const rooms = Array.from(socket.rooms).filter(r => r !== socket.id);
-            rooms.forEach(room => {
-                socket.to(room).emit("peer-disconnected");
-            });
         });
     });
 };

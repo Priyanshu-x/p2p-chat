@@ -1,23 +1,30 @@
-// Check authentication first
-fetch('/api/auth/status')
-    .then(res => res.json())
-    .then(data => {
-        if (!data.authenticated) {
-            window.location.href = '/login';
-        }
-    })
-    .catch(() => window.location.href = '/login');
+const names = ['Levi', 'Goku', 'Lelouch', 'Itachi', 'Naruto', 'Saitama', 'Deadpool', 'Wolverine',
+    'Eren', 'Zoro', 'Lightning', 'Cloud', 'Aerith', 'Jinx', 'Vi', 'Geralt', 'Ciri',
+    'Dante', 'Vergil', 'Tanjiro', 'Nezuko', 'Zenitsu', 'Gojo', 'Sukuna', 'Megumi',
+    'Luffy', 'Sanji', 'Ichigo', 'Rukia', 'Batman', 'Joker', 'Neo', 'Trinity',
+    'Morpheus', 'Vader', 'Kylo', 'Rey', 'Spider', 'Miles', 'Kirito', 'Asuna',
+    'Rem', 'Subaru', 'Aqua', 'Megumin', 'Kazuma', 'Albedo', 'Rimuru', 'Shion'];
 
-// socket is now auto-discovery (same domain)
-const socket = io({
-    transports: ['websocket']
+function getRandomName() {
+    return names[Math.floor(Math.random() * names.length)];
+}
+
+function generateRoomCode() {
+    return `192.168.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}`;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("roomCodeInput").value = generateRoomCode();
+    document.getElementById("nicknameInput").value = getRandomName();
 });
 
-let peerConnection;
-let dataChannel;
+let socket;
 let localStream;
-let isInitiator = false;
-let currentRoomId = null;
+let myNickname = "";
+let myRoomCode = "";
+
+// Mesh state
+const peers = {}; // map of targetId -> { peerConnection, dataChannel, nickname }
 
 // Reply Feature
 let replyingTo = null; // { id, text, sender }
@@ -28,7 +35,6 @@ const statusContainer = document.getElementById("connectionStatus");
 
 function updateStatus(state) {
     if (!statusDot || !statusText || !statusContainer) return;
-
     statusContainer.classList.remove("hidden");
 
     switch (state) {
@@ -47,142 +53,216 @@ function updateStatus(state) {
     }
 }
 
-// Display connection status
-socket.on("connect", () => {
-    updateStatus('connected');
-});
+document.getElementById("startChat").addEventListener("click", () => {
+    myRoomCode = document.getElementById("roomCodeInput").value.trim();
+    myNickname = document.getElementById("nicknameInput").value.trim();
 
-socket.on("connect_error", (err) => {
-    console.error("Connection Error:", err);
-    updateStatus('disconnected');
-    if (err.message === "xhr poll error") return;
-});
-
-socket.on("disconnect", () => {
-    updateStatus('disconnected');
-});
-
-// STEP 1: Wait for Pairing
-socket.on("waiting", (data) => {
-    console.log(data.message);
-    updateStatus('connected');
-    document.getElementById("chat-box").innerHTML += `<p class="text-gray-500 text-xs italic">> ${data.message}</p>`;
-});
-
-socket.on("paired", async ({ partnerId, initiator, roomId }) => {
-    console.log("🔗 Paired with:", partnerId, "in room:", roomId);
-    isInitiator = initiator;
-    currentRoomId = roomId;
-
-    updateStatus('paired');
-
-    document.getElementById("chat-box").innerHTML = ""; // Clear waiting message
-    startConnection();
-
-    // Auto show chat container
-    document.getElementById("chat-container").classList.remove("hidden");
-    document.getElementById("startChatContainer").classList.add("hidden");
-});
-
-socket.on("peer-disconnected", () => {
-    console.log("Peer disconnected");
-    updateStatus('connected');
-    alert("Peer disconnected. Reload to find a new peer.");
-    peerConnection.close();
-    location.reload();
-});
-
-// STEP 2: Start WebRTC Connection
-async function startConnection() {
-    try {
-        const configuration = {
-            iceServers: [
-                { urls: 'stun:stun.l.google.com:19302' }
-            ]
-        };
-        peerConnection = new RTCPeerConnection(configuration);
-
-        if (isInitiator) {
-            dataChannel = peerConnection.createDataChannel("chat");
-            setupDataChannel();
-        } else {
-            peerConnection.ondatachannel = (event) => {
-                dataChannel = event.channel;
-                setupDataChannel();
-            };
-        }
-
-        peerConnection.onicecandidate = (event) => {
-            if (event.candidate) {
-                socket.emit("ice-candidate", event.candidate);
-            }
-        };
-
-        peerConnection.ontrack = (event) => {
-            document.getElementById("remoteVideo").srcObject = event.streams[0];
-        };
-
-        if (isInitiator) {
-            const offer = await peerConnection.createOffer();
-            await peerConnection.setLocalDescription(offer);
-            socket.emit("offer", offer);
-        }
-    } catch (error) {
-        console.error("❌ Error in WebRTC setup:", error);
+    if (!myRoomCode || !myNickname) {
+        alert("Please enter a Room Code and Nickname.");
+        return;
     }
+
+    // Hide join screen and show chat
+    document.getElementById("startChatContainer").classList.add("hidden");
+    document.getElementById("chat-container").classList.remove("hidden");
+    updateStatus('connected');
+
+    connectToServer();
+});
+
+function connectToServer() {
+    socket = io({
+        transports: ['websocket'],
+        auth: { roomCode: myRoomCode, nickname: myNickname }
+    });
+
+    socket.on("connect", () => {
+        // Connected to server
+        if (document.getElementById("groupChatToggle").checked) {
+            socket.emit("unlock_capacity");
+        }
+    });
+
+    socket.on("connect_error", (err) => {
+        console.error("Connection Error:", err);
+        updateStatus('disconnected');
+    });
+
+    socket.on("disconnect", () => {
+        updateStatus('disconnected');
+    });
+
+    socket.on("error_msg", (msg) => {
+        alert("Error: " + msg);
+        window.location.reload();
+    });
+
+    socket.on("joined-room", ({ roomCode, capacity, existingPeers }) => {
+        console.log(`Joined room ${roomCode} with capacity ${capacity}`);
+        if (existingPeers.length > 0) {
+            updateStatus('paired');
+            document.getElementById("chat-box").innerHTML += `<p class="text-gray-500 text-xs italic">> Joined room with ${existingPeers.length} peer(s)</p>`;
+        } else {
+            document.getElementById("chat-box").innerHTML += `<p class="text-gray-500 text-xs italic">> Waiting for peers to join...</p>`;
+        }
+    });
+
+    // When someone joins, initiate a connection with them
+    socket.on("user-joined", async ({ partnerId, partnerNickname }) => {
+        console.log(`User joined: ${partnerNickname} (${partnerId})`);
+        updateStatus('paired');
+        document.getElementById("chat-box").innerHTML += `<p class="text-green-500 text-xs italic">> ${partnerNickname} joined the room.</p>`;
+        
+        await createPeerConnection(partnerId, partnerNickname, true);
+    });
+
+    socket.on("offer", async ({ senderId, offer }) => {
+        console.log(`Received offer from ${senderId}`);
+        // If we don't have a peer connection yet, create one as the responder
+        if (!peers[senderId]) {
+            await createPeerConnection(senderId, "Peer", false);
+        }
+        
+        const pc = peers[senderId].peerConnection;
+        await pc.setRemoteDescription(new RTCSessionDescription(offer));
+        const answer = await pc.createAnswer();
+        await pc.setLocalDescription(answer);
+        socket.emit("answer", { targetId: senderId, answer });
+    });
+
+    socket.on("answer", async ({ senderId, answer }) => {
+        console.log(`Received answer from ${senderId}`);
+        if (peers[senderId]) {
+            await peers[senderId].peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
+        }
+    });
+
+    socket.on("ice-candidate", async ({ senderId, candidate }) => {
+        if (peers[senderId] && candidate) {
+            try {
+                await peers[senderId].peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+            } catch (error) {
+                console.error("Error adding ICE candidate:", error);
+            }
+        }
+    });
+
+    socket.on("peer-disconnected", ({ partnerId }) => {
+        if (peers[partnerId]) {
+            const name = peers[partnerId].nickname;
+            document.getElementById("chat-box").innerHTML += `<p class="text-red-500 text-xs italic">> ${name} left the room.</p>`;
+            
+            peers[partnerId].peerConnection.close();
+            delete peers[partnerId];
+
+            // Remove video element if it exists
+            const remoteVid = document.getElementById(`video-${partnerId}`);
+            if (remoteVid) remoteVid.remove();
+
+            if (Object.keys(peers).length === 0) {
+                updateStatus('connected'); // Back to waiting
+            }
+        }
+    });
 }
 
-// STEP 3: Handle WebRTC Signaling
-socket.on("offer", async (offer) => {
-    try {
-        if (!peerConnection) startConnection();
-        await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
+async function createPeerConnection(partnerId, nickname, isInitiator) {
+    const configuration = {
+        iceServers: [
+            { urls: 'stun:stun.l.google.com:19302' }
+        ]
+    };
+    const pc = new RTCPeerConnection(configuration);
+    
+    peers[partnerId] = { peerConnection: pc, dataChannel: null, nickname };
 
-        const answer = await peerConnection.createAnswer();
-        await peerConnection.setLocalDescription(answer);
-        socket.emit("answer", answer);
-    } catch (error) {
-        console.error("❌ Error handling offer:", error);
+    // If local video is active, add tracks to the new peer
+    if (localStream) {
+        localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
     }
-});
 
-socket.on("answer", async (answer) => {
-    try {
-        await peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
-    } catch (error) {
-        console.error("❌ Error handling answer:", error);
+    if (isInitiator) {
+        const dc = pc.createDataChannel("chat");
+        peers[partnerId].dataChannel = dc;
+        setupDataChannel(partnerId);
+        
+        const offer = await pc.createOffer();
+        await pc.setLocalDescription(offer);
+        socket.emit("offer", { targetId: partnerId, offer });
+    } else {
+        pc.ondatachannel = (event) => {
+            peers[partnerId].dataChannel = event.channel;
+            setupDataChannel(partnerId);
+        };
     }
-});
 
-socket.on("ice-candidate", async (candidate) => {
-    if (candidate && peerConnection) {
-        try {
-            await peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
-        } catch (error) {
-            console.error("❌ Error adding ICE candidate:", error);
+    pc.onicecandidate = (event) => {
+        if (event.candidate) {
+            socket.emit("ice-candidate", { targetId: partnerId, candidate: event.candidate });
         }
-    }
-});
+    };
+
+    pc.ontrack = (event) => {
+        // Create video element for this peer if it doesn't exist
+        let remoteVid = document.getElementById(`video-${partnerId}`);
+        if (!remoteVid) {
+            remoteVid = document.createElement('video');
+            remoteVid.id = `video-${partnerId}`;
+            remoteVid.autoplay = true;
+            remoteVid.className = "w-48 border border-blue-900/30 bg-black";
+            document.getElementById("remoteVideos").appendChild(remoteVid);
+            
+            // Show video container if hidden
+            document.querySelector(".videos").classList.remove("hidden");
+            document.getElementById("startVideo").classList.add("hidden"); // Optional: hide button if video is already started
+        }
+        remoteVid.srcObject = event.streams[0];
+    };
+}
+
+function setupDataChannel(partnerId) {
+    const dc = peers[partnerId].dataChannel;
+    dc.onopen = () => console.log(`✅ Data channel open with ${partnerId}!`);
+    dc.onmessage = (event) => {
+        let msg = event.data;
+        try {
+            msg = JSON.parse(event.data);
+        } catch (e) {
+            // Legacy fallback
+        }
+        displayMessage(peers[partnerId].nickname, msg);
+        playRandomNotificationSound();
+    };
+}
 
 // STEP 4: Chat Feature
 function sendMessage() {
     let messageInput = document.getElementById("chat-input");
     let message = messageInput.value.trim();
 
-    if (message && dataChannel && dataChannel.readyState === "open") {
+    if (message) {
         const payload = {
             id: Date.now(),
             text: message,
             replyTo: replyingTo // object or null
         };
 
-        console.log(`📨 Sending message:`, payload);
+        // Broadcast to all active peers
+        let sent = false;
+        Object.values(peers).forEach(peer => {
+            if (peer.dataChannel && peer.dataChannel.readyState === "open") {
+                peer.dataChannel.send(JSON.stringify(payload));
+                sent = true;
+            }
+        });
 
-        dataChannel.send(JSON.stringify(payload)); // Send as JSON now
-        displayMessage("You", payload);
-
-        messageInput.value = "";
-        cancelReply();
+        if (sent) {
+            displayMessage("You", payload);
+            messageInput.value = "";
+            cancelReply();
+        } else {
+            alert("No peers connected.");
+        }
     }
 }
 
@@ -201,21 +281,12 @@ function cancelReply() {
     document.getElementById("reply-preview").classList.add("hidden");
 }
 
-// ✅ Ensure the button is properly clickable
 document.addEventListener("DOMContentLoaded", () => {
-    const startChatBtn = document.getElementById("startChat");
-
-    if (startChatBtn) {
-        startChatBtn.addEventListener("click", () => {
-            // console.log("Ready");
-        });
-    }
-
     const logoutBtn = document.getElementById("logoutBtn");
     if (logoutBtn) {
-        logoutBtn.addEventListener('click', async () => {
-            await fetch('/api/auth/logout', { method: 'POST' });
-            window.location.href = '/login';
+        logoutBtn.addEventListener('click', () => {
+            if (socket) socket.disconnect();
+            window.location.reload();
         });
     }
 
@@ -228,7 +299,6 @@ document.getElementById("chat-input").addEventListener("keypress", (event) => {
 });
 
 function displayMessage(sender, data) {
-    // data can be string (old messages) or object (new format)
     let messageText = "";
     let messageId = "";
     let replyData = null;
@@ -243,24 +313,22 @@ function displayMessage(sender, data) {
     }
 
     let chatBox = document.getElementById("chat-box");
-    let displaySender = sender === "You" ? "YOU" : "PEER"; // Uppercase for theme
+    let displaySender = sender === "You" ? "YOU" : sender.toUpperCase();
 
     const colorClass = sender === "You" ? "text-blue-400" : "text-green-400";
 
-    // Reply Block
     let replyBlock = "";
     if (replyData) {
         replyBlock = `
             <div class="mb-1 ml-4 pl-2 border-l-2 border-gray-600 text-xs text-gray-500 italic">
                 <span class="block text-[10px] font-bold uppercase mb-0.5 ${replyData.sender === "You" ? "text-blue-400" : "text-green-400"}">
-                    ${replyData.sender === "You" ? "You" : "Peer"}
+                    ${replyData.sender === "You" ? "You" : replyData.sender}
                 </span>
                 ${replyData.text}
             </div>
         `;
     }
 
-    // Message Block with Click to Reply
     const msgHtml = `
         <div class="mb-4 group" ondblclick="setReply(${messageId}, '${messageText.replace(/'/g, "\\'")}', '${sender}')">
             ${replyBlock}
@@ -277,32 +345,37 @@ function displayMessage(sender, data) {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-// Handle incoming messages
-function setupDataChannel() {
-    dataChannel.onopen = () => console.log("✅ Data channel open!");
-    dataChannel.onmessage = (event) => {
-        let msg = event.data;
-        try {
-            msg = JSON.parse(event.data);
-        } catch (e) {
-            // Legacy/Plain string fallback
-        }
-        displayMessage("Peer", msg);
-        playRandomNotificationSound();
-    };
-}
-
-// ... Video and Sound logic remains same ...
-
 // STEP 5: Video Call Feature
 document.getElementById("startVideo").addEventListener("click", async () => {
     try {
-        document.querySelector(".videos").style.display = "flex";
+        document.querySelector(".videos").classList.remove("hidden");
+        document.getElementById("startVideo").classList.add("hidden");
 
         localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
         document.getElementById("localVideo").srcObject = localStream;
 
-        localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+        // Add local stream to all existing peer connections
+        Object.values(peers).forEach(peer => {
+            if (peer.peerConnection) {
+                localStream.getTracks().forEach(track => {
+                    peer.peerConnection.addTrack(track, localStream);
+                });
+                
+                // Renegotiation is required when adding a track after initial setup.
+                // For a proper implementation, onnegotiationneeded should be handled,
+                // but a simple approach is to create a new offer right away.
+                // We'll trigger a manual renegotiation:
+            }
+        });
+        
+        // Manual renegotiation for all peers
+        for (const partnerId in peers) {
+            const pc = peers[partnerId].peerConnection;
+            const offer = await pc.createOffer();
+            await pc.setLocalDescription(offer);
+            socket.emit("offer", { targetId: partnerId, offer });
+        }
+        
     } catch (error) {
         console.error("❌ Error accessing camera/microphone:", error);
     }

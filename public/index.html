@@ -32,14 +32,30 @@
         <!-- Main Content -->
         <div class="flex-1 p-6 relative flex flex-col items-center justify-center bg-black">
 
-            <div id="startChatContainer" class="flex flex-col items-center gap-4">
-                <p class="text-gray-500 text-sm uppercase tracking-widest">Secure Connection Ready</p>
-                <div class="animate-pulse w-2 h-2 bg-green-500 rounded-full mb-4"></div>
-                <button id="startChat" class="btn-primary text-sm tracking-widest uppercase px-8 py-4">Initialize
-                    Pairing</button>
+            <div id="startChatContainer" class="flex flex-col items-center gap-4 w-full max-w-sm z-20 bg-black p-6 border border-[#222]">
+                <p class="text-gray-500 text-sm uppercase tracking-widest mb-2">Initialize Secure Relay</p>
+                
+                <div class="w-full">
+                    <label class="text-[10px] uppercase tracking-widest text-gray-500 mb-1 block">Room Code</label>
+                    <input type="text" id="roomCodeInput" maxlength="15" class="w-full bg-black border border-[#333] text-white p-3 text-center tracking-widest font-mono focus:border-blue-500 focus:outline-none transition-colors" placeholder="e.g. 192.168.101.102">
+                </div>
+                
+                <div class="w-full">
+                    <label class="text-[10px] uppercase tracking-widest text-gray-500 mb-1 block">Alias</label>
+                    <input type="text" id="nicknameInput" maxlength="15" class="w-full bg-black border border-[#333] text-white p-3 text-center tracking-widest font-mono focus:border-blue-500 focus:outline-none transition-colors" placeholder="Nickname">
+                </div>
+
+                <div class="w-full flex items-center justify-between border border-[#333] p-3 mt-2">
+                    <label class="text-[10px] uppercase tracking-widest text-gray-400 cursor-pointer flex-1" for="groupChatToggle">Unlock Group Chat (Up to 15)</label>
+                    <input type="checkbox" id="groupChatToggle" class="cursor-pointer">
+                </div>
+
+                <button id="startChat" class="w-full text-sm tracking-widest uppercase px-8 py-3 mt-4 bg-blue-600 hover:bg-blue-500 text-white font-bold transition-colors">
+                    Join Room
+                </button>
             </div>
 
-            <div id="chat-container" class="hidden w-full h-full flex flex-col absolute inset-0 bg-black">
+            <div id="chat-container" class="hidden w-full h-full flex flex-col absolute inset-0 bg-black z-10">
                 <div id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-4 scrollbar-thin scrollbar-thumb-gray-800">
                     <!-- Messages will look like terminal output or minimalist blocks -->
                 </div>
@@ -68,13 +84,15 @@
             </div>
 
             <button id="startVideo"
-                class="hidden absolute top-6 right-20 text-xs uppercase tracking-widest text-purple-500 hover:text-purple-400">
+                class="hidden absolute top-6 right-20 text-xs uppercase tracking-widest text-purple-500 hover:text-purple-400 z-30">
                 Video
             </button>
 
-            <div class="videos hidden absolute top-16 right-6 flex flex-col gap-4 z-10">
+            <div class="videos hidden absolute top-16 right-6 flex flex-col gap-4 z-30 max-h-[80%] overflow-y-auto scrollbar-none">
                 <video id="localVideo" autoplay muted class="w-48 border border-[#333] bg-black"></video>
-                <video id="remoteVideo" autoplay class="w-48 border border-blue-900/30 bg-black"></video>
+                <div id="remoteVideos" class="flex flex-col gap-4">
+                    <!-- Remote videos dynamically appended here -->
+                </div>
             </div>
         </div>
     </div>

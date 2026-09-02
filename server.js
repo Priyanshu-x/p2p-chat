@@ -6,11 +6,8 @@ const path = require("path");
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
-const session = require('express-session');
-const SQLiteStore = require('connect-sqlite3')(session);
 
 const logger = require('./config/logger');
-const authRoutes = require('./routes/authRoutes');
 const socketHandler = require('./socket/socketHandler');
 
 const app = express();
@@ -42,29 +39,11 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-// Session Setup
-const sessionMiddleware = session({
-    store: new SQLiteStore({ db: 'sessions.db', dir: './database' }),
-    secret: process.env.SESSION_SECRET || 'default_secret',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        secure: process.env.NODE_ENV === 'production',
-        httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24 // 1 day
-    }
-});
-
-app.use(sessionMiddleware);
-
 // Logging request
 app.use((req, res, next) => {
     logger.info(`${req.method} ${req.url}`);
     next();
 });
-
-// Routes
-app.use('/api/auth', authRoutes);
 
 // Redirect .html requests to clean URLs
 app.use((req, res, next) => {
@@ -75,16 +54,8 @@ app.use((req, res, next) => {
     next();
 });
 
-// Static files (protected or public?)
-// We'll serve login/register freely, but protect dashboard if we had one.
-// The root '/' serves index.html, which now needs auth check.
+// Static files
 app.use(express.static(path.join(__dirname, "public"), { extensions: ['html'] }));
-
-// Route to check auth status for frontend redirection
-app.get('/api/auth/status', (req, res) => {
-    if (req.session.userId) res.json({ authenticated: true });
-    else res.json({ authenticated: false });
-});
 
 // Socket.io Setup
 const io = socketIo(server, {
@@ -93,10 +64,6 @@ const io = socketIo(server, {
         methods: ["GET", "POST"]
     }
 });
-
-// Share session with socket.io
-const wrap = middleware => (socket, next) => middleware(socket.request, {}, next);
-io.use(wrap(sessionMiddleware));
 
 // Initialize Socket Logic
 socketHandler(io);
