@@ -10,7 +10,8 @@ function getRandomName() {
 }
 
 function generateRoomCode() {
-    return `192.168.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}`;
+    // Generate a random 4-digit number, padded with leading zeros if necessary
+    return Math.floor(1000 + Math.random() * 9000).toString();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
